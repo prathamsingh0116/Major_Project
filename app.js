@@ -102,7 +102,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/listings", listingsRouter);
 app.use("/listings/:id/reviews", reviewsRouter);
-app.use("/", userRouter)
+// app.use("/", userRouter);
+app.use("/", listingsRouter);
 
 app.all("*", (req, res, next) => {
   next(new ExpressError(505, "page not found"));
