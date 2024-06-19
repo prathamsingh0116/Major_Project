@@ -1,3 +1,9 @@
+<style>
+.country{
+    text-transform: capitalize;
+}
+</style>
+
 <%layout("/layouts/boilerplate") %>
 
     <div class="row">
@@ -30,7 +36,7 @@
                 </p>
                 <p class="card-text">Price :&nbsp; &#8377; <%= listing.price.toLocaleString("en-IN") %>
                 </p>
-                <p class="card-text">Country : &nbsp;
+                <p class="card-text counttry">Country : &nbsp;
                     <%= listing.country %>
                 </p>
                 </p>
