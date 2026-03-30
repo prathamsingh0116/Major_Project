@@ -27,7 +27,7 @@ const upload = multer({ multer });
 
 //database connect 
 // const url = "mongodb://127.0.0.1:27017/wanderlust"
-const dbURL = process.env.ATLASDB_URL
+const dbURL = "mongodb+srv://rajputpratham27:Pratham2003@cluster0.wxbvzyf.mongodb.net"
 main().then(() => {
   console.log("Connected to DB");
 })
