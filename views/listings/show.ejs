@@ -17,7 +17,7 @@
                 <p class="card-text">
                 <p class="card-text owner">
                     Owned by : <i><strong>
-                    <%= listing.owner.username %>
+                    <%= listing.owner?.username || "Unknown" %>
                 </strong></i>
                 </p>
                 <p class="card-text">
@@ -45,7 +45,7 @@
         <% if(currUser && listing.owner._id.equals(currUser._id)) { %>
 
         <div class="btns">
-            <a href="/listings/<%=listing._id %>/edit" class="btn btn-danger col-1 offset-3">Edit</a>
+            <a href="/listings/<%=listing._id || "Unknown" %>/edit" class="btn btn-danger col-1 offset-3">Edit</a>
 
 
             <div class="col-1">
