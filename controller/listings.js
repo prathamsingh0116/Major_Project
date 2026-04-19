@@ -21,18 +21,35 @@ module.exports.index = async (req, res) => {
     res.render("listings/showchoices.ejs", { allListings });
   };
 
-  module.exports.show = async (req, res, next) => {
+  // module.exports.show = async (req, res, next) => {
 
-    let { id } = req.params;
-    const listing = await Listing.findById(id)
-    .populate({path: "reviews", populate:{path:"author"}}).populate("owner");
-    if (!listing) {
-      req.flash("error", "The Lisiting you are searching is Deleted");
-      res.redirect("/listings");
-    }
-    res.render("listings/show.ejs", { listing });
+  //   let { id } = req.params;
+  //   const listing = await Listing.findById(id)
+  //   .populate({path: "reviews", populate:{path:"author"}}).populate("owner");
+  //   if (!listing) {
+  //     req.flash("error", "The Lisiting you are searching is Deleted");
+  //     res.redirect("/listings");
+  //   }
+  //   res.render("listings/show.ejs", { listing });
   
+  // }
+//GPTfix
+
+module.exports.show = async (req, res) => {
+  let { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).send("Invalid Listing ID");
   }
+
+  const listing = await Listing.findById(id);
+
+  if (!listing) {
+    return res.status(404).send("Listing not found");
+  }
+
+  res.render("listings/show", { listing });
+};
 
   module.exports.createRoute = async (req, res, next) => {
     let url = req.file.path || "https://images.unsplash.com/photo-1774200981075-a728eaaa3824?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
