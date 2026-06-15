@@ -26,8 +26,8 @@ const multer  = require('multer');
 const upload = multer({ multer });
 
 //database connect 
-const url = "mongodb://127.0.0.1:27017/wanderlust"
-// const url = process.env.ATLASDB_URL
+// const url = "mongodb://127.0.0.1:27017/wanderlust"
+const url = process.env.ATLASDB_URL
 // const url = "mongodb://rajputpratham27:NBUEw5vOBkZEeR9f@cluster0-shard-00-00.wxbvzyf.mongodb.net:27017,cluster0-shard-00-01.wxbvzyf.mongodb.net:27017,cluster0-shard-00-02.wxbvzyf.mongodb.net:27017/dbname?ssl=true&replicaSet=atlas-xxxxx-shard-0&authSource=admin&retryWrites=true&w=majority";wh
 
 main().then(() => {
