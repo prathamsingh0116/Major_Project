@@ -26,18 +26,20 @@ const multer  = require('multer');
 const upload = multer({ multer });
 
 //database connect 
-// const url = "mongodb://127.0.0.1:27017/wanderlust"
-const dbURL = "mongodb+srv://rajputpratham27:wKQoc5T29Axojiea@cluster0.wxbvzyf.mongodb.net"
+const url = "mongodb://127.0.0.1:27017/wanderlust"
+// const url = process.env.ATLASDB_URL
+// const url = "mongodb://rajputpratham27:NBUEw5vOBkZEeR9f@cluster0-shard-00-00.wxbvzyf.mongodb.net:27017,cluster0-shard-00-01.wxbvzyf.mongodb.net:27017,cluster0-shard-00-02.wxbvzyf.mongodb.net:27017/dbname?ssl=true&replicaSet=atlas-xxxxx-shard-0&authSource=admin&retryWrites=true&w=majority";wh
+
 main().then(() => {
   console.log("Connected to DB");
 })
 async function main() {
-  await mongoose.connect(dbURL);
+  await mongoose.connect(url);
 }
 
 
 const store = MongoStore.create({
-  mongoUrl: dbURL,
+  mongoUrl: url,
   crypto: {
     secret: process.env.SECRET,
   } ,
@@ -102,8 +104,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/listings", listingsRouter);
 app.use("/listings/:id/reviews", reviewsRouter);
-// app.use("/", userRouter);
-app.use("/", listingsRouter);
+app.use("/", userRouter)
 
 app.all("*", (req, res, next) => {
   next(new ExpressError(505, "page not found"));
